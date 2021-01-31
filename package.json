@@ -3,17 +3,27 @@
   "version": "0.0.1",
   "description": "Webhook handler for Linear",
   "main": "index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "engines": {
     "node": ">=14.0.0"
   },
   "scripts": {
+    "build": "tsc",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/korosuke613/linear-webhook.git"
   },
-  "keywords": [],
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "Linear"
+  ],
   "author": "Futa Hirakoba <korosuke613613@gmail.com> (https://korosuke613.github.io/)",
   "license": "MIT",
   "bugs": {
@@ -21,7 +31,7 @@
   },
   "homepage": "https://github.com/korosuke613/linear-webhook#readme",
   "devDependencies": {
-    "@babel/preset-typescript": "^7.12.7",
+    "@cybozu/eslint-config": "^11.0.3",
     "@types/node": "^14.14.22",
     "eslint": "^7.19.0",
     "prettier": "^2.2.1",
