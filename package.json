@@ -1,6 +1,6 @@
 {
   "name": "linear-webhook",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Webhook handler for Linear",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
