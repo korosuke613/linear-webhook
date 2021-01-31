@@ -22,13 +22,14 @@ export class Handler {
   public async execCallback(webhook: Webhook) {
     const webhookInfo = this.getWebhookInfo(webhook);
     if (webhookInfo.name === "UnknownWebhook") {
-      throw new Error("unknown webhook event");
+      throw new Error("Unknown webhook event");
     }
     let result;
     try {
       result = this.listeners[webhookInfo.name](webhook);
     } catch (e) {
       console.error(e);
+      throw new Error("Callback is doesn't exists");
     }
     return result;
   }

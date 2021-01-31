@@ -15,12 +15,20 @@ jobs:
           fetch-depth: 0
           ref: main
       - uses: actions/setup-node@v1
-      - run: |
-          if [ -f "yarn.lock" ]; then
-            yarn install
-          else
-            npm ci
-          fi
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          node-version: 14.x
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - run: npm ci
       - run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
