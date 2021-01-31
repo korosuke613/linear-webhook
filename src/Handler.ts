@@ -13,18 +13,32 @@ export class Handler {
   private readonly listeners: {
     [key: string]: (webhook: Webhook) => void;
   } = {};
-  public addCallbackWebhook(
+  public addCallback(
     webhookType: WebhookTypes,
-    callback: (webhook: Webhook) => void
+    callback: (webhook: Webhook) => any
   ) {
     this.listeners[webhookType] = callback;
   }
   public async execCallback(webhook: Webhook) {
     const webhookInfo = this.getWebhookInfo(webhook);
-    return this.listeners[webhookInfo.name](webhook);
+    if (webhookInfo.name === "UnknownWebhook") {
+      throw new Error("unknown webhook event");
+    }
+    let result;
+    try {
+      result = this.listeners[webhookInfo.name](webhook);
+    } catch (e) {
+      console.error(e);
+    }
+    return result;
   }
 
-  public getWebhookInfo(webhook: Webhook) {
+  public getWebhookInfo(
+    webhook: Webhook
+  ): {
+    name: string;
+    webhook: Webhook;
+  } {
     const webhookType = this.getWebhookType(webhook);
     let castedWebhook;
     switch (webhookType) {
@@ -45,6 +59,9 @@ export class Handler {
         break;
       case "RemoveCommentWebhook":
         castedWebhook = webhook as RemoveCommentWebhook;
+        break;
+      default:
+        castedWebhook = webhook;
         break;
     }
     return {

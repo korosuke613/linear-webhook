@@ -1,7 +1,2 @@
-import { Handler } from "./Handler";
-import * as Interfaces from "./Interfaces";
-
-export default {
-  Handler,
-  Interfaces,
-};
+export { Handler as WebhookHandler } from "./Handler";
+export * from "./Interfaces";
