@@ -1,3 +1,13 @@
+## [0.1.2](https://github.com/korosuke613/linear-webhook/compare/v0.1.1...v0.1.2) (2021-02-02)
+
+
+### Bug Fixes
+
+* Handler and Interfaces ([66051ba](https://github.com/korosuke613/linear-webhook/commit/66051ba45946ed09d7979a428d3df46aaa212cfb))
+* test only *Test.(ts|tsx|js) ([b94cec6](https://github.com/korosuke613/linear-webhook/commit/b94cec610c5f69242a3257c9ad555a4b9a27b844))
+
+
+
 ## [0.1.1](https://github.com/korosuke613/linear-webhook/compare/v0.1.0...v0.1.1) (2021-01-31)
 
 
