@@ -8,6 +8,5 @@ handler.addCallback<CreateIssueWebhook>("CreateIssueWebhook", (webhook) => {
 });
 
 (async () => {
-  const unknownWebhook: Webhook = createIssue;
-  await handler.execCallback(unknownWebhook);
+  await handler.execCallback(createIssue);
 })();
