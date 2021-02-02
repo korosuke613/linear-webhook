@@ -1,7 +1,7 @@
 module.exports = {
   roots: ["<rootDir>/src"],
   testMatch: [
-    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/__tests__/**/*Test.+(ts|tsx|js)",
     "**/?(*.)+(spec|test).+(ts|tsx|js)",
   ],
   testPathIgnorePatterns: ["/data/"],
