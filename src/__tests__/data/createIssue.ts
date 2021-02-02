@@ -1,4 +1,6 @@
-exports.createIssue = {
+import { CreateIssueWebhook } from "../../Interfaces";
+
+export const createIssue: CreateIssueWebhook = {
   action: "create",
   createdAt: "2021-01-30T11:19:39.427Z",
   data: {

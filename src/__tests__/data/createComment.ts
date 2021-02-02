@@ -1,4 +1,6 @@
-exports.createComment = {
+import { CreateCommentWebhook } from "../../Interfaces";
+
+export const createComment: CreateCommentWebhook = {
   action: "create",
   createdAt: "2021-01-30T11:47:17.226Z",
   data: {

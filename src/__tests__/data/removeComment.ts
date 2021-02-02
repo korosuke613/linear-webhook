@@ -1,4 +1,6 @@
-exports.removeComment = {
+import { RemoveCommentWebhook } from "../../Interfaces";
+
+export const removeComment: RemoveCommentWebhook = {
   action: "remove",
   createdAt: "2021-01-30T12:32:54.754Z",
   data: {

@@ -1,15 +1,14 @@
-exports.removeIssue = {
-  action: "remove",
-  createdAt: "2021-01-30T11:48:48.707Z",
+export const unknownType = {
+  action: "create",
+  createdAt: "2021-01-30T11:19:39.427Z",
   data: {
-    id: "ac36bcc2-xxxx-xxxx-xxxx-3e13107f89be",
-    createdAt: "2021-01-30T11:33:45.487Z",
-    updatedAt: "2021-01-30T11:33:45.487Z",
-    archivedAt: "2021-01-30T11:48:48.707Z",
-    number: 12,
-    title: "webhook test 2",
+    id: "236e0fe8-xxxx-xxxx-xxxx-b2df06e33810",
+    createdAt: "2021-01-30T11:19:39.427Z",
+    updatedAt: "2021-01-30T11:19:39.427Z",
+    number: 11,
+    title: "webhook test",
     priority: 0,
-    boardOrder: -40.42,
+    boardOrder: -86.81,
     previousIdentifiers: [],
     priorityLabel: "No priority",
     teamId: "eeaa0cbd-xxxx-xxxx-xxxx-1c701c3485f1",
@@ -29,5 +28,6 @@ exports.removeIssue = {
       key: "KOR",
     },
   },
-  type: "Issue",
+  url: "https://linear.app/korosuke613/issue/KOR-11/webhook-test",
+  type: "Hogehoge",
 };
