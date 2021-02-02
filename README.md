@@ -19,8 +19,7 @@ npm i linear-webhook
 [handlerExample.ts](./src/__tests__/examples/handlerExample.ts)
 
 ```ts
-import { WebhookHandler } from "./index";
-import { CreateIssueWebhook } from "./Interfaces";
+import { WebhookHandler, CreateIssueWebhook } from "linear-webhook";
 
 const handler = new WebhookHandler();
 handler.addCallback<CreateIssueWebhook>("CreateIssueWebhook", (webhook) => {
@@ -29,8 +28,7 @@ handler.addCallback<CreateIssueWebhook>("CreateIssueWebhook", (webhook) => {
 });
 
 (async () => {
-  const unknownWebhook: Webhook = webhook;
-  await handler.execCallback(unknownWebhook);
+  await handler.execCallback(webhook);
 })();
 ```
 
