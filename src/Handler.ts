@@ -1,77 +1,40 @@
+import { Webhook, WebhookEventsUnion } from "./Interfaces";
 import {
-  CreateCommentWebhook,
-  CreateIssueWebhook,
-  RemoveCommentWebhook,
-  RemoveIssueWebhook,
-  UpdateCommentWebhook,
-  UpdateIssueWebhook,
-  Webhook,
-  WebhookTypes,
-} from "./Interfaces";
+  CallbackNotFoundError,
+  UnknownWebhookEventError,
+} from "./HandlerError";
 
 export class Handler {
-  private readonly listeners: {
-    [key: string]: (webhook: Webhook) => void;
-  } = {};
-  public addCallback(
-    webhookType: WebhookTypes,
-    callback: (webhook: Webhook) => any
+  public readonly listeners = new Map<
+    WebhookEventsUnion,
+    (webhook: any) => any
+  >();
+
+  public clearCallbacks() {
+    this.listeners.clear();
+  }
+
+  public addCallback<T extends Webhook>(
+    webhookEvent: WebhookEventsUnion,
+    callback: (webhook: T) => any
   ) {
-    this.listeners[webhookType] = callback;
+    this.listeners.set(webhookEvent, callback);
   }
+
   public async execCallback(webhook: Webhook) {
-    const webhookInfo = this.getWebhookInfo(webhook);
-    if (webhookInfo.name === "UnknownWebhook") {
-      throw new Error("Unknown webhook event");
+    const webhookEvent = this.getWebhookEvent(webhook);
+    if (webhookEvent === "UnknownWebhook") {
+      throw new UnknownWebhookEventError(webhook);
     }
-    let result;
-    try {
-      result = this.listeners[webhookInfo.name](webhook);
-    } catch (e) {
-      console.error(e);
-      throw new Error("Callback is doesn't exists");
+    const callbackFunction = this.listeners.get(webhookEvent);
+    if (callbackFunction === undefined) {
+      throw new CallbackNotFoundError(webhookEvent);
     }
-    return result;
+
+    return callbackFunction(webhook);
   }
 
-  public getWebhookInfo(
-    webhook: Webhook
-  ): {
-    name: string;
-    webhook: Webhook;
-  } {
-    const webhookType = this.getWebhookType(webhook);
-    let castedWebhook;
-    switch (webhookType) {
-      case "CreateIssueWebhook":
-        castedWebhook = webhook as CreateIssueWebhook;
-        break;
-      case "UpdateIssueWebhook":
-        castedWebhook = webhook as UpdateIssueWebhook;
-        break;
-      case "RemoveIssueWebhook":
-        castedWebhook = webhook as RemoveIssueWebhook;
-        break;
-      case "CreateCommentWebhook":
-        castedWebhook = webhook as CreateCommentWebhook;
-        break;
-      case "UpdateCommentWebhook":
-        castedWebhook = webhook as UpdateCommentWebhook;
-        break;
-      case "RemoveCommentWebhook":
-        castedWebhook = webhook as RemoveCommentWebhook;
-        break;
-      default:
-        castedWebhook = webhook;
-        break;
-    }
-    return {
-      name: webhookType,
-      webhook: castedWebhook,
-    };
-  }
-
-  public getWebhookType(webhook: Webhook): WebhookTypes {
+  public getWebhookEvent(webhook: Webhook): WebhookEventsUnion {
     switch (webhook.action) {
       case "create":
         switch (webhook.type) {
