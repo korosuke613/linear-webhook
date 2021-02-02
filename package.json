@@ -2,7 +2,9 @@
   "name": "linear-webhook",
   "version": "0.1.3",
   "description": "Webhook handler for Linear",
+  "main": "lib/index.js",
   "module": "lib/index.js",
+  "exports": "./lib/index.js",
   "types": "lib/index.d.ts",
   "engines": {
     "node": ">=14.0.0"
@@ -26,7 +28,7 @@
     "lib"
   ],
   "keywords": [
-    "Linear"
+    "Linear.app"
   ],
   "author": "Futa Hirakoba <korosuke613613@gmail.com> (https://korosuke613.github.io/)",
   "license": "MIT",
