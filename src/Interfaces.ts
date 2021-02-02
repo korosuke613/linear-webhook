@@ -78,10 +78,10 @@ interface IssueData extends BaseData {
   parentId?: IssueId;
   projectId?: ProjectId;
   subscriberIds: UserId[];
-  creatorId: User;
+  creatorId: UserId;
   labelIds: LabelId[];
-  assignee: User;
-  project: Project;
+  assignee?: User;
+  project?: Project;
   state: State;
   team: Team;
   labels?: Label[];
@@ -102,12 +102,13 @@ interface CommentData extends BaseData {
 /*
  *  Type interfaces
  */
-interface Base {
+export interface Base {
   action: Action;
   createdAt: ISOString;
   data: BaseData;
   type: Type;
 }
+export class BaseClass implements Partial<Base> {}
 interface Issue extends Base {
   data: IssueData;
   type: Extract<Base["type"], "Issue">;
@@ -137,12 +138,14 @@ interface Update {
     dueDate?: null | ISOString;
     cycleId?: null | CycleId;
     projectId?: null | ProjectId;
+    stateId?: null | StateId;
     assigneeId?: null | UserId;
     parentId?: null | IssueId;
     subIssueSortOrder?: null | number;
     body?: string;
     editedAt?: null | ISOString;
   };
+  url?: string;
 }
 interface Remove {}
 
@@ -151,7 +154,7 @@ interface Remove {}
  */
 export interface CreateIssueWebhook extends Create, Issue {}
 export interface UpdateIssueWebhook extends Update, Issue {
-  updateFrom: Omit<Update["updatedFrom"], "body" | "editedAt">;
+  updatedFrom: Omit<Update["updatedFrom"], "body" | "editedAt">;
 }
 export interface RemoveIssueWebhook extends Remove, Issue {}
 
@@ -159,7 +162,7 @@ export interface CreateCommentWebhook extends Create, Comment {
   data: Omit<CommentData, "editedAt">;
 }
 export interface UpdateCommentWebhook extends Update, Comment {
-  updateFrom: Pick<
+  updatedFrom: Pick<
     Update["updatedFrom"],
     "updatedAt" | "archivedAt" | "body" | "editedAt"
   >;
@@ -176,11 +179,14 @@ export type Webhook =
   | UpdateCommentWebhook
   | RemoveCommentWebhook;
 
-export type WebhookTypes =
-  | "CreateIssueWebhook"
-  | "UpdateIssueWebhook"
-  | "RemoveIssueWebhook"
-  | "CreateCommentWebhook"
-  | "UpdateCommentWebhook"
-  | "RemoveCommentWebhook"
-  | "UnknownWebhook";
+export const WebhookEvents = {
+  CreateIssueWebhook: "CreateIssueWebhook",
+  UpdateIssueWebhook: "UpdateIssueWebhook",
+  RemoveIssueWebhook: "RemoveIssueWebhook",
+  CreateCommentWebhook: "CreateCommentWebhook",
+  UpdateCommentWebhook: "UpdateCommentWebhook",
+  RemoveCommentWebhook: "RemoveCommentWebhook",
+  UnknownWebhook: "UnknownWebhook",
+};
+
+export type WebhookEventsUnion = keyof typeof WebhookEvents;
