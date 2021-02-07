@@ -83,6 +83,27 @@ describe("Test getWebhookType", () => {
       },
       expected: { webhookType: WebhookEvents.UpdateCycleWebhook },
     },
+    {
+      name: `createProjectForAllSetting is ${WebhookEvents.CreateProjectWebhook}`,
+      input: {
+        webhook: Data.createProjectForAllSetting,
+      },
+      expected: { webhookType: WebhookEvents.CreateProjectWebhook },
+    },
+    {
+      name: `updateProjectForRename is ${WebhookEvents.UpdateProjectWebhook}`,
+      input: {
+        webhook: Data.updateProjectForRename,
+      },
+      expected: { webhookType: WebhookEvents.UpdateProjectWebhook },
+    },
+    {
+      name: `removeProject is ${WebhookEvents.RemoveProjectWebhook}`,
+      input: {
+        webhook: Data.removeProject,
+      },
+      expected: { webhookType: WebhookEvents.RemoveProjectWebhook },
+    },
   ];
 
   for (const { name, input, expected } of testcases) {

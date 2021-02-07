@@ -11,6 +11,9 @@ import { updateIssueLabel } from "./updateIssueLabel";
 import { removeIssueLabel } from "./removeIssueLabel";
 import { createReaction } from "./createReaction";
 import { updateCycleForChangeStartTime } from "./updateCycleForChangeStartTime";
+import { createProjectForAllSetting } from "./createProjectForAllSetting";
+import { updateProjectForRename } from "./updateProjectForRename";
+import { removeProject } from "./removeProject";
 
 export default {
   createIssue,
@@ -26,4 +29,7 @@ export default {
   unknownType,
   unknownAction,
   updateCycleForChangeStartTime,
+  createProjectForAllSetting,
+  updateProjectForRename,
+  removeProject,
 };

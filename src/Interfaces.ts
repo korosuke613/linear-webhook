@@ -2,7 +2,13 @@
  *  Primitive types
  */
 type Action = "create" | "update" | "remove";
-type Type = "Issue" | "Comment" | "IssueLabel" | "Reaction" | "Cycle";
+type Type =
+  | "Issue"
+  | "Comment"
+  | "IssueLabel"
+  | "Reaction"
+  | "Cycle"
+  | "Project";
 
 // ex) e788ada6-xxxx-yyyy-zzzz-5717c26104ad
 type Id = `${string}-${string}-${string}-${string}-${string}`;
@@ -15,9 +21,25 @@ type TeamId = Id;
 type CycleId = Id;
 type CommentId = Id;
 type ReactionId = Id;
+type MilestoneId = Id;
 
 // ex) 2021-01-30T14:56:43.247Z
 type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+// ex) 2021-01-30
+type SimpleDate = `${number}-${number}-${number}`;
+
+type IssueStateType =
+  | "backlog"
+  | "unstarted"
+  | "started"
+  | "completed"
+  | "canceled";
+type ProjectStateType =
+  | "planned"
+  | "started"
+  | "paused"
+  | "completed"
+  | "canceled";
 
 /*
  * Primitive interfaces
@@ -26,7 +48,7 @@ interface State {
   id: StateId;
   name: string;
   color: string;
-  type: "backlog" | "unstarted" | "started" | "completed" | "canceled";
+  type: IssueStateType;
 }
 interface Team {
   id: TeamId;
@@ -36,10 +58,6 @@ interface Team {
 
 interface User {
   id: UserId;
-  name: string;
-}
-interface Project {
-  id: ProjectId;
   name: string;
 }
 interface Label {
@@ -76,7 +94,10 @@ interface IssueData extends BaseData {
   creatorId: UserId;
   labelIds: LabelId[];
   assignee?: User;
-  project?: Project;
+  project?: {
+    id: ProjectId;
+    name: string;
+  };
   state: State;
   team: Team;
   labels?: Label[];
@@ -121,6 +142,29 @@ interface CycleData extends BaseData {
   teamId: TeamId;
   uncompletedIssuesUponCloseIds: [];
 }
+interface ProjectData extends BaseData {
+  name: string;
+  description: string;
+  slugId: string;
+  icon?: string;
+  color: string;
+  state: ProjectStateType;
+  creatorId: UserId;
+  leadId?: UserId;
+  milestoneId: MilestoneId;
+  targetDate?: SimpleDate;
+  startedAt?: ISOString;
+  sortOrder: number;
+  issueCountHistory: number[];
+  completedIssueCountHistory: number[];
+  scopeHistory: number[];
+  completedScopeHistory: number[];
+  slackNewIssue: boolean;
+  slackIssueComments: boolean;
+  slackIssueStatuses: boolean;
+  teamIds: TeamId[];
+  memberIds: UserId[];
+}
 
 /*
  *  Type interfaces
@@ -152,12 +196,16 @@ interface Cycle extends Base {
   data: CycleData;
   type: Extract<Base["type"], "Cycle">;
 }
+interface Project extends Base {
+  data: ProjectData;
+  type: Extract<Base["type"], "Project">;
+}
 
 /*
  *  Action interfaces
  */
 interface Create {
-  url?: string;
+  url: string;
 }
 interface Update {
   updatedFrom: {
@@ -209,7 +257,9 @@ export interface RemoveCommentWebhook extends Remove, Comment {
   data: Omit<CommentData, "issue" | "user" | "editedAt">;
 }
 
-export interface CreateIssueLabelWebhook extends Create, IssueLabel {}
+export interface CreateIssueLabelWebhook
+  extends Omit<Create, "url">,
+    IssueLabel {}
 export interface UpdateIssueLabelWebhook extends Update, IssueLabel {}
 export interface RemoveIssueLabelWebhook extends Remove, IssueLabel {
   data: IssueLabelDate & {
@@ -217,9 +267,19 @@ export interface RemoveIssueLabelWebhook extends Remove, IssueLabel {
   };
 }
 
-export interface CreateReactionWebhook extends Create, Reaction {}
+export interface CreateReactionWebhook extends Omit<Create, "url">, Reaction {}
 
 export interface UpdateCycleWebhook extends Update, Cycle {}
+
+export interface CreateProjectWebhook extends Create, Project {}
+export interface UpdateProjectWebhook extends Update, Project {}
+export interface RemoveProjectWebhook extends Remove, Project {
+  data: ProjectData & {
+    archivedAt: ISOString;
+    canceledAt: ISOString;
+  };
+  url: string;
+}
 
 export type Webhook =
   | Base
@@ -233,7 +293,10 @@ export type Webhook =
   | UpdateIssueLabelWebhook
   | RemoveIssueLabelWebhook
   | CreateReactionWebhook
-  | UpdateCycleWebhook;
+  | UpdateCycleWebhook
+  | CreateProjectWebhook
+  | UpdateProjectWebhook
+  | RemoveProjectWebhook;
 
 export const WebhookEvents = {
   CreateIssueWebhook: "CreateIssueWebhook",
@@ -247,6 +310,9 @@ export const WebhookEvents = {
   RemoveIssueLabelWebhook: "RemoveIssueLabelWebhook",
   CreateReactionWebhook: "CreateReactionWebhook",
   UpdateCycleWebhook: "UpdateCycleWebhook",
+  CreateProjectWebhook: "CreateProjectWebhook",
+  UpdateProjectWebhook: "UpdateProjectWebhook",
+  RemoveProjectWebhook: "RemoveProjectWebhook",
   UnknownWebhook: "UnknownWebhook",
 };
 
