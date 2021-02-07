@@ -204,10 +204,10 @@ interface Project extends Base {
 /*
  *  Action interfaces
  */
-interface Create {
+type Create<T = Base> = T & {
   url: string;
-}
-interface Update {
+};
+type Update<T = Base> = T & {
   updatedFrom: {
     updatedAt: null | ISOString;
     archivedAt: null | ISOString;
@@ -232,50 +232,47 @@ interface Update {
     endsAt?: null | ISOString;
   };
   url?: string;
-}
-interface Remove {}
+};
+type Remove<T = Base> = T & {
+  data: { archivedAt?: ISOString };
+};
 
 /*
  *  Webhook interfaces
  */
-export interface CreateIssueWebhook extends Create, Issue {}
-export interface UpdateIssueWebhook extends Update, Issue {
+export interface CreateIssueWebhook extends Create<Issue> {}
+export interface UpdateIssueWebhook extends Update<Issue> {
   updatedFrom: Omit<Update["updatedFrom"], "body" | "editedAt">;
 }
-export interface RemoveIssueWebhook extends Remove, Issue {}
+export interface RemoveIssueWebhook extends Remove<Issue> {}
 
-export interface CreateCommentWebhook extends Create, Comment {
-  data: Omit<CommentData, "editedAt">;
+export interface CreateCommentWebhook extends Create<Comment> {
+  data: Omit<Create<Comment>["data"], "editedAt">;
 }
-export interface UpdateCommentWebhook extends Update, Comment {
+export interface UpdateCommentWebhook extends Update<Comment> {
   updatedFrom: Pick<
     Update["updatedFrom"],
     "updatedAt" | "archivedAt" | "body" | "editedAt"
   >;
 }
-export interface RemoveCommentWebhook extends Remove, Comment {
-  data: Omit<CommentData, "issue" | "user" | "editedAt">;
+export interface RemoveCommentWebhook extends Remove<Comment> {
+  data: Omit<Remove["data"], "archivedAt"> &
+    Omit<Remove<Comment>["data"], "issue" | "user" | "editedAt">;
 }
 
 export interface CreateIssueLabelWebhook
-  extends Omit<Create, "url">,
-    IssueLabel {}
-export interface UpdateIssueLabelWebhook extends Update, IssueLabel {}
-export interface RemoveIssueLabelWebhook extends Remove, IssueLabel {
-  data: IssueLabelDate & {
-    archivedAt: ISOString;
-  };
-}
+  extends Omit<Create<IssueLabel>, "url"> {}
+export interface UpdateIssueLabelWebhook extends Update<IssueLabel> {}
+export interface RemoveIssueLabelWebhook extends Remove<IssueLabel> {}
 
-export interface CreateReactionWebhook extends Omit<Create, "url">, Reaction {}
+export interface CreateReactionWebhook extends Omit<Create<Reaction>, "url"> {}
 
-export interface UpdateCycleWebhook extends Update, Cycle {}
+export interface UpdateCycleWebhook extends Update<Cycle> {}
 
-export interface CreateProjectWebhook extends Create, Project {}
-export interface UpdateProjectWebhook extends Update, Project {}
-export interface RemoveProjectWebhook extends Remove, Project {
-  data: ProjectData & {
-    archivedAt: ISOString;
+export interface CreateProjectWebhook extends Create<Project> {}
+export interface UpdateProjectWebhook extends Update<Project> {}
+export interface RemoveProjectWebhook extends Remove<Project> {
+  data: Remove<Project>["data"] & {
     canceledAt: ISOString;
   };
   url: string;
