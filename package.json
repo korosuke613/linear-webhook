@@ -25,7 +25,8 @@
     "url": "git+https://github.com/korosuke613/linear-webhook.git"
   },
   "files": [
-    "lib"
+    "lib",
+    "!__tests__"
   ],
   "keywords": [
     "Linear.app"
