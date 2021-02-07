@@ -1,0 +1,30 @@
+import { CreateProjectWebhook } from "../../Interfaces";
+
+export const createProjectForDefault: CreateProjectWebhook = {
+  action: "create",
+  createdAt: "2021-02-07T12:18:42.073Z",
+  data: {
+    id: "14449f5f-xxxx-xxxx-xxxx-155b5c08af2a",
+    createdAt: "2021-02-07T12:18:42.073Z",
+    updatedAt: "2021-02-07T12:18:42.073Z",
+    name: "new Project",
+    description: "",
+    slugId: "87cf626a561e",
+    color: "#bec2c8",
+    state: "planned",
+    creatorId: "80e102b0-xxxx-xxxx-xxxx-044bcfb4cd39",
+    milestoneId: "b89dd730-xxxx-xxxx-xxxx-b195ab3144da",
+    sortOrder: 1109.12,
+    issueCountHistory: [],
+    completedIssueCountHistory: [],
+    scopeHistory: [],
+    completedScopeHistory: [],
+    slackNewIssue: true,
+    slackIssueComments: true,
+    slackIssueStatuses: true,
+    teamIds: ["eeaa0cbd-xxxx-xxxx-xxxx-1c701c3485f1"],
+    memberIds: [],
+  },
+  url: "https://linear.app/xxxx/project/new-project-87cf626a561e",
+  type: "Project",
+};
