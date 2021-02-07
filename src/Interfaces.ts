@@ -2,7 +2,7 @@
  *  Primitive types
  */
 type Action = "create" | "update" | "remove";
-type Type = "Issue" | "Comment";
+type Type = "Issue" | "Comment" | "IssueLabel";
 
 // ex) e788ada6-xxxx-yyyy-zzzz-5717c26104ad
 type Id = `${string}-${string}-${string}-${string}-${string}`;
@@ -98,6 +98,12 @@ interface CommentData extends BaseData {
   user?: User;
   reactions: Reaction[];
 }
+interface IssueLabelDate extends BaseData {
+  name: string;
+  color: string;
+  teamId: TeamId;
+  creatorId: UserId;
+}
 
 /*
  *  Type interfaces
@@ -117,12 +123,16 @@ interface Comment extends Base {
   data: CommentData;
   type: Extract<Base["type"], "Comment">;
 }
+interface IssueLabel extends Base {
+  data: IssueLabelDate;
+  type: Extract<Base["type"], "IssueLabel">;
+}
 
 /*
  *  Action interfaces
  */
 interface Create {
-  url: string;
+  url?: string;
 }
 interface Update {
   updatedFrom: {
@@ -144,6 +154,7 @@ interface Update {
     subIssueSortOrder?: null | number;
     body?: string;
     editedAt?: null | ISOString;
+    name?: null | string;
   };
   url?: string;
 }
@@ -167,9 +178,18 @@ export interface UpdateCommentWebhook extends Update, Comment {
     "updatedAt" | "archivedAt" | "body" | "editedAt"
   >;
 }
-export interface RemoveCommentWebhook extends Comment {
+export interface RemoveCommentWebhook extends Remove, Comment {
   data: Omit<CommentData, "issue" | "user" | "editedAt">;
 }
+
+export interface CreateIssueLabel extends Create, IssueLabel {}
+export interface UpdateIssueLabel extends Update, IssueLabel {}
+export interface RemoveIssueLabel extends Remove, IssueLabel {
+  data: IssueLabelDate & {
+    archivedAt: ISOString;
+  };
+}
+
 export type Webhook =
   | Base
   | CreateIssueWebhook
@@ -177,7 +197,10 @@ export type Webhook =
   | RemoveIssueWebhook
   | CreateCommentWebhook
   | UpdateCommentWebhook
-  | RemoveCommentWebhook;
+  | RemoveCommentWebhook
+  | CreateIssueLabel
+  | UpdateIssueLabel
+  | RemoveIssueLabel;
 
 export const WebhookEvents = {
   CreateIssueWebhook: "CreateIssueWebhook",
@@ -186,6 +209,9 @@ export const WebhookEvents = {
   CreateCommentWebhook: "CreateCommentWebhook",
   UpdateCommentWebhook: "UpdateCommentWebhook",
   RemoveCommentWebhook: "RemoveCommentWebhook",
+  CreateIssueLabelWebhook: "CreateIssueLabelWebhook",
+  UpdateIssueLabelWebhook: "UpdateIssueLabelWebhook",
+  RemoveIssueLabelWebhook: "RemoveIssueLabelWebhook",
   UnknownWebhook: "UnknownWebhook",
 };
 

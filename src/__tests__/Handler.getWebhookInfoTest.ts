@@ -21,9 +21,9 @@ describe("Test getWebhookType", () => {
       expected: { webhookType: WebhookEvents.CreateCommentWebhook },
     },
     {
-      name: `updateIssueLabel is ${WebhookEvents.UpdateIssueWebhook}`,
+      name: `updateIssueForLabel is ${WebhookEvents.UpdateIssueWebhook}`,
       input: {
-        webhook: Data.updateIssueLabel,
+        webhook: Data.updateIssueForLabel,
       },
       expected: { webhookType: WebhookEvents.UpdateIssueWebhook },
     },
@@ -47,6 +47,27 @@ describe("Test getWebhookType", () => {
         webhook: Data.removeComment,
       },
       expected: { webhookType: WebhookEvents.RemoveCommentWebhook },
+    },
+    {
+      name: `createIssueLabel is ${WebhookEvents.CreateIssueLabelWebhook}`,
+      input: {
+        webhook: Data.createIssueLabel,
+      },
+      expected: { webhookType: WebhookEvents.CreateIssueLabelWebhook },
+    },
+    {
+      name: `updateIssueLabel is ${WebhookEvents.UpdateIssueLabelWebhook}`,
+      input: {
+        webhook: Data.updateIssueLabel,
+      },
+      expected: { webhookType: WebhookEvents.UpdateIssueLabelWebhook },
+    },
+    {
+      name: `removeIssueLabel is ${WebhookEvents.RemoveIssueLabelWebhook}`,
+      input: {
+        webhook: Data.removeIssueLabel,
+      },
+      expected: { webhookType: WebhookEvents.RemoveIssueLabelWebhook },
     },
   ];
 
