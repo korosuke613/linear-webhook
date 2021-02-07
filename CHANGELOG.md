@@ -1,3 +1,20 @@
+# [0.2.0](https://github.com/korosuke613/linear-webhook/compare/v0.1.4...v0.2.0) (2021-02-07)
+
+
+### Bug Fixes
+
+* interface name for IssueLabel ([56dc70a](https://github.com/korosuke613/linear-webhook/commit/56dc70a894a862f9b8128da3b59e6fb5af22c9df))
+
+
+### Features
+
+* support Cycle type only action for create ([f0c7d8c](https://github.com/korosuke613/linear-webhook/commit/f0c7d8c80c9b5e3ac5ac639132889dc79dd9c8b5))
+* support IssueLabel type ([896dac2](https://github.com/korosuke613/linear-webhook/commit/896dac22dadf4c26ec40feea00835fe059887a60))
+* support Project type ([1a8b692](https://github.com/korosuke613/linear-webhook/commit/1a8b6920c8c5663c8b9dc88d008ccbb8a3af856f))
+* support Reaction type ([db49382](https://github.com/korosuke613/linear-webhook/commit/db4938283564f1533a647dba4e86f7d6a0be8de6))
+
+
+
 ## [0.1.4](https://github.com/korosuke613/linear-webhook/compare/v0.1.3...v0.1.4) (2021-02-02)
 
 
