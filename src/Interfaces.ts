@@ -191,9 +191,9 @@ export interface RemoveCommentWebhook extends Remove, Comment {
   data: Omit<CommentData, "issue" | "user" | "editedAt">;
 }
 
-export interface CreateIssueLabel extends Create, IssueLabel {}
-export interface UpdateIssueLabel extends Update, IssueLabel {}
-export interface RemoveIssueLabel extends Remove, IssueLabel {
+export interface CreateIssueLabelWebhook extends Create, IssueLabel {}
+export interface UpdateIssueLabelWebhook extends Update, IssueLabel {}
+export interface RemoveIssueLabelWebhook extends Remove, IssueLabel {
   data: IssueLabelDate & {
     archivedAt: ISOString;
   };
@@ -209,9 +209,9 @@ export type Webhook =
   | CreateCommentWebhook
   | UpdateCommentWebhook
   | RemoveCommentWebhook
-  | CreateIssueLabel
-  | UpdateIssueLabel
-  | RemoveIssueLabel
+  | CreateIssueLabelWebhook
+  | UpdateIssueLabelWebhook
+  | RemoveIssueLabelWebhook
   | CreateReactionWebhook;
 
 export const WebhookEvents = {

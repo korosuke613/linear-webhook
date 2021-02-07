@@ -1,6 +1,6 @@
-import { UpdateIssueLabel } from "../../Interfaces";
+import { UpdateIssueLabelWebhook } from "../../Interfaces";
 
-export const updateIssueLabel: UpdateIssueLabel = {
+export const updateIssueLabel: UpdateIssueLabelWebhook = {
   action: "update",
   createdAt: "2021-02-07T09:33:32.156Z",
   data: {
