@@ -44,6 +44,8 @@ export class Handler {
             return "CreateCommentWebhook";
           case "IssueLabel":
             return "CreateIssueLabelWebhook";
+          case "Reaction":
+            return "CreateReactionWebhook";
         }
         break;
       case "update":

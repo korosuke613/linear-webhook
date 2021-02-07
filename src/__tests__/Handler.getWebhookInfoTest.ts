@@ -69,6 +69,13 @@ describe("Test getWebhookType", () => {
       },
       expected: { webhookType: WebhookEvents.RemoveIssueLabelWebhook },
     },
+    {
+      name: `createReaction is ${WebhookEvents.CreateReactionWebhook}`,
+      input: {
+        webhook: Data.createReaction,
+      },
+      expected: { webhookType: WebhookEvents.CreateReactionWebhook },
+    },
   ];
 
   for (const { name, input, expected } of testcases) {

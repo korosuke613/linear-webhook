@@ -18,7 +18,8 @@ export const createComment: CreateCommentWebhook = {
       id: "80e102b0-xxxx-xxxx-xxxx-044bcfb4cd39",
       name: "user@example.com",
     },
-    reactions: [],
+    // Emoji reaction used to be included here, but it became independent as `type: Reaction` on Feb 4, 2021.
+    // reactions: [],
   },
   url:
     "https://linear.app/korosuke613/issue/KOR-12/webhook-test-2#comment-5081a82b",

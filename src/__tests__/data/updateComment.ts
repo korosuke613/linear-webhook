@@ -19,7 +19,8 @@ export const updateComment: UpdateCommentWebhook = {
       id: "80e102b0-xxxx-xxxx-xxxx-044bcfb4cd39",
       name: "user@example.com",
     },
-    reactions: [],
+    // Emoji reaction used to be included here, but it became independent as `type: Reaction` on Feb 4, 2021.
+    // reactions: [],
   },
   updatedFrom: {
     updatedAt: "2021-01-31T13:13:00.988Z",
