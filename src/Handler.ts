@@ -56,6 +56,8 @@ export class Handler {
             return "UpdateCommentWebhook";
           case "IssueLabel":
             return "UpdateIssueLabelWebhook";
+          case "Cycle":
+            return "UpdateCycleWebhook";
         }
         break;
       case "remove":

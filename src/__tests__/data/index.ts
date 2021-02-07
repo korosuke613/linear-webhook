@@ -10,6 +10,7 @@ import { createIssueLabel } from "./createIssueLabel";
 import { updateIssueLabel } from "./updateIssueLabel";
 import { removeIssueLabel } from "./removeIssueLabel";
 import { createReaction } from "./createReaction";
+import { updateCycleForChangeStartTime } from "./updateCycleForChangeStartTime";
 
 export default {
   createIssue,
@@ -24,4 +25,5 @@ export default {
   createReaction,
   unknownType,
   unknownAction,
+  updateCycleForChangeStartTime,
 };

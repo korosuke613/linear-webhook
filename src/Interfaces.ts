@@ -2,7 +2,7 @@
  *  Primitive types
  */
 type Action = "create" | "update" | "remove";
-type Type = "Issue" | "Comment" | "IssueLabel" | "Reaction";
+type Type = "Issue" | "Comment" | "IssueLabel" | "Reaction" | "Cycle";
 
 // ex) e788ada6-xxxx-yyyy-zzzz-5717c26104ad
 type Id = `${string}-${string}-${string}-${string}-${string}`;
@@ -109,6 +109,18 @@ interface ReactionData extends BaseData {
   };
   user: User;
 }
+interface CycleData extends BaseData {
+  number: number;
+  name?: string;
+  startsAt: ISOString;
+  endsAt: ISOString;
+  issueCountHistory: number[];
+  completedIssueCountHistory: number[];
+  scopeHistory: number[];
+  completedScopeHistory: number[];
+  teamId: TeamId;
+  uncompletedIssuesUponCloseIds: [];
+}
 
 /*
  *  Type interfaces
@@ -135,6 +147,10 @@ interface IssueLabel extends Base {
 interface Reaction extends Base {
   data: ReactionData;
   type: Extract<Base["type"], "Reaction">;
+}
+interface Cycle extends Base {
+  data: CycleData;
+  type: Extract<Base["type"], "Cycle">;
 }
 
 /*
@@ -164,6 +180,8 @@ interface Update {
     body?: string;
     editedAt?: null | ISOString;
     name?: null | string;
+    startsAt?: null | ISOString;
+    endsAt?: null | ISOString;
   };
   url?: string;
 }
@@ -201,6 +219,8 @@ export interface RemoveIssueLabelWebhook extends Remove, IssueLabel {
 
 export interface CreateReactionWebhook extends Create, Reaction {}
 
+export interface UpdateCycleWebhook extends Update, Cycle {}
+
 export type Webhook =
   | Base
   | CreateIssueWebhook
@@ -212,7 +232,8 @@ export type Webhook =
   | CreateIssueLabelWebhook
   | UpdateIssueLabelWebhook
   | RemoveIssueLabelWebhook
-  | CreateReactionWebhook;
+  | CreateReactionWebhook
+  | UpdateCycleWebhook;
 
 export const WebhookEvents = {
   CreateIssueWebhook: "CreateIssueWebhook",
@@ -225,6 +246,7 @@ export const WebhookEvents = {
   UpdateIssueLabelWebhook: "UpdateIssueLabelWebhook",
   RemoveIssueLabelWebhook: "RemoveIssueLabelWebhook",
   CreateReactionWebhook: "CreateReactionWebhook",
+  UpdateCycleWebhook: "UpdateCycleWebhook",
   UnknownWebhook: "UnknownWebhook",
 };
 
