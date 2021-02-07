@@ -1,6 +1,6 @@
-import { RemoveIssueLabel } from "../../Interfaces";
+import { RemoveIssueLabelWebhook } from "../../Interfaces";
 
-export const removeIssueLabel: RemoveIssueLabel = {
+export const removeIssueLabel: RemoveIssueLabelWebhook = {
   action: "remove",
   createdAt: "2021-02-07T09:38:46.255Z",
   data: {

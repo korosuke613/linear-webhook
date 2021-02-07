@@ -10,7 +10,8 @@ export const removeComment: RemoveCommentWebhook = {
     body: "delete!",
     userId: "80e102b0-xxxx-xxxx-xxxx-044bcfb4cd39",
     issueId: "236e0fe8-xxxx-xxxx-xxxx-b2df06e33810",
-    reactions: [],
+    // Emoji reaction used to be included here, but it became independent as `type: Reaction` on Feb 4, 2021.
+    // reactions: [],
   },
   type: "Comment",
 };

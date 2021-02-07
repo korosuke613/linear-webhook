@@ -9,6 +9,7 @@ import { unknownType } from "./unknownType";
 import { createIssueLabel } from "./createIssueLabel";
 import { updateIssueLabel } from "./updateIssueLabel";
 import { removeIssueLabel } from "./removeIssueLabel";
+import { createReaction } from "./createReaction";
 
 export default {
   createIssue,
@@ -20,6 +21,7 @@ export default {
   createIssueLabel,
   updateIssueLabel,
   removeIssueLabel,
+  createReaction,
   unknownType,
   unknownAction,
 };
