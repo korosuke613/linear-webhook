@@ -42,6 +42,8 @@ export class Handler {
             return "CreateIssueWebhook";
           case "Comment":
             return "CreateCommentWebhook";
+          case "IssueLabel":
+            return "CreateIssueLabelWebhook";
         }
         break;
       case "update":
@@ -50,6 +52,8 @@ export class Handler {
             return "UpdateIssueWebhook";
           case "Comment":
             return "UpdateCommentWebhook";
+          case "IssueLabel":
+            return "UpdateIssueLabelWebhook";
         }
         break;
       case "remove":
@@ -58,6 +62,8 @@ export class Handler {
             return "RemoveIssueWebhook";
           case "Comment":
             return "RemoveCommentWebhook";
+          case "IssueLabel":
+            return "RemoveIssueLabelWebhook";
         }
         break;
       default:
