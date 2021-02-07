@@ -76,6 +76,13 @@ describe("Test getWebhookType", () => {
       },
       expected: { webhookType: WebhookEvents.CreateReactionWebhook },
     },
+    {
+      name: `updateCycleForChangeStartTime is ${WebhookEvents.UpdateCycleWebhook}`,
+      input: {
+        webhook: Data.updateCycleForChangeStartTime,
+      },
+      expected: { webhookType: WebhookEvents.UpdateCycleWebhook },
+    },
   ];
 
   for (const { name, input, expected } of testcases) {
