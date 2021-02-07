@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/korosuke613/linear-webhook/compare/v0.2.0...v0.2.1) (2021-02-07)
+
+
+### Bug Fixes
+
+* Exclude test files during npm pack ([76bbd11](https://github.com/korosuke613/linear-webhook/commit/76bbd11d3839640f800974725f76801afa19f9e8))
+
+
+
 # [0.2.0](https://github.com/korosuke613/linear-webhook/compare/v0.1.4...v0.2.0) (2021-02-07)
 
 
