@@ -5,19 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-    labels: 
-      - "dependencies"
-    allow:
-      - dependency-type: "production"
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-    labels: 
-      - "devDependencies"
-    allow:
-      - dependency-type: "development"
