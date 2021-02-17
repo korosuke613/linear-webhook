@@ -39,6 +39,13 @@ jobs:
       - name: Run eslint
         run: npm run lint
 
+  lint-for-jetbrains:
+    name: lint-for-jetbrains
+    runs-on: ubuntu-latest
+    steps:
+      - name: Qodana - Code Inspection
+        uses: JetBrains/qodana-action@v1.0-eap
+
   test:
     name: test
     runs-on: ubuntu-latest
