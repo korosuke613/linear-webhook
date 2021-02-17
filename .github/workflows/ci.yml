@@ -48,8 +48,12 @@ jobs:
         uses: JetBrains/qodana-action@v1.0-eap
       - uses: actions/upload-artifact@v2
         with:
-          name: qodana-result
+          name: qodana-report
           path: report
+      - uses: actions/upload-artifact@v2
+        with:
+          name: qodana-result
+          path: qodana
 
   test:
     name: test
