@@ -1,3 +1,14 @@
+# [0.3.0](https://github.com/korosuke613/linear-webhook/compare/v0.2.1...v0.3.0) (2021-03-04)
+
+
+### Features
+
+* export all errors ([8c51ade](https://github.com/korosuke613/linear-webhook/commit/8c51ade94baf11d5e309b6b92cba2192f4c4376e))
+* export all types ([e84488b](https://github.com/korosuke613/linear-webhook/commit/e84488bd1c815f55f044a97bc410741ca74d376e))
+* use custom param for addCallback ([fd24239](https://github.com/korosuke613/linear-webhook/commit/fd24239291384c4f1ebf939442bf2aa11449a703))
+
+
+
 ## [0.2.1](https://github.com/korosuke613/linear-webhook/compare/v0.2.0...v0.2.1) (2021-02-07)
 
 
