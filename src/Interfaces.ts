@@ -1,8 +1,8 @@
 /*
  *  Primitive types
  */
-type Action = "create" | "update" | "remove";
-type Type =
+export type Action = "create" | "update" | "remove";
+export type Type =
   | "Issue"
   | "Comment"
   | "IssueLabel"
@@ -11,30 +11,30 @@ type Type =
   | "Project";
 
 // ex) e788ada6-xxxx-yyyy-zzzz-5717c26104ad
-type Id = `${string}-${string}-${string}-${string}-${string}`;
-type IssueId = Id;
-type UserId = Id;
-type StateId = Id;
-type LabelId = Id;
-type ProjectId = Id;
-type TeamId = Id;
-type CycleId = Id;
-type CommentId = Id;
-type ReactionId = Id;
-type MilestoneId = Id;
+export type Id = `${string}-${string}-${string}-${string}-${string}`;
+export type IssueId = Id;
+export type UserId = Id;
+export type StateId = Id;
+export type LabelId = Id;
+export type ProjectId = Id;
+export type TeamId = Id;
+export type CycleId = Id;
+export type CommentId = Id;
+export type ReactionId = Id;
+export type MilestoneId = Id;
 
 // ex) 2021-01-30T14:56:43.247Z
-type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+export type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
 // ex) 2021-01-30
-type SimpleDate = `${number}-${number}-${number}`;
+export type SimpleDate = `${number}-${number}-${number}`;
 
-type IssueStateType =
+export type IssueStateType =
   | "backlog"
   | "unstarted"
   | "started"
   | "completed"
   | "canceled";
-type ProjectStateType =
+export type ProjectStateType =
   | "planned"
   | "started"
   | "paused"
@@ -44,23 +44,23 @@ type ProjectStateType =
 /*
  * Primitive interfaces
  */
-interface State {
+export interface State {
   id: StateId;
   name: string;
   color: string;
   type: IssueStateType;
 }
-interface Team {
+export interface Team {
   id: TeamId;
   name: string;
   key: "KOR";
 }
 
-interface User {
+export interface User {
   id: UserId;
   name: string;
 }
-interface Label {
+export interface Label {
   id: LabelId;
   name: string;
   color: string;
@@ -69,12 +69,13 @@ interface Label {
 /*
  *  Data interfaces
  */
-interface BaseData {
+export interface BaseData {
+  [key: string]: unknown;
   id: IssueId | CommentId;
   createdAt: ISOString;
   updatedAt: ISOString;
 }
-interface IssueData extends BaseData {
+export interface IssueData extends BaseData {
   archivedAt?: ISOString;
   number: number;
   title: string;
@@ -102,7 +103,7 @@ interface IssueData extends BaseData {
   team: Team;
   labels?: Label[];
 }
-interface CommentData extends BaseData {
+export interface CommentData extends BaseData {
   body: string;
   editedAt?: ISOString;
   userId: UserId;
@@ -113,13 +114,13 @@ interface CommentData extends BaseData {
   };
   user?: User;
 }
-interface IssueLabelDate extends BaseData {
+export interface IssueLabelDate extends BaseData {
   name: string;
   color: string;
   teamId: TeamId;
   creatorId: UserId;
 }
-interface ReactionData extends BaseData {
+export interface ReactionData extends BaseData {
   emoji: string;
   userId: UserId;
   commentId: CommentId;
@@ -130,7 +131,7 @@ interface ReactionData extends BaseData {
   };
   user: User;
 }
-interface CycleData extends BaseData {
+export interface CycleData extends BaseData {
   number: number;
   name?: string;
   startsAt: ISOString;
@@ -142,7 +143,7 @@ interface CycleData extends BaseData {
   teamId: TeamId;
   uncompletedIssuesUponCloseIds: [];
 }
-interface ProjectData extends BaseData {
+export interface ProjectData extends BaseData {
   name: string;
   description: string;
   slugId: string;
@@ -176,27 +177,27 @@ export interface Base {
   type: Type;
 }
 export class BaseClass implements Partial<Base> {}
-interface Issue extends Base {
+export interface Issue extends Base {
   data: IssueData;
   type: Extract<Base["type"], "Issue">;
 }
-interface Comment extends Base {
+export interface Comment extends Base {
   data: CommentData;
   type: Extract<Base["type"], "Comment">;
 }
-interface IssueLabel extends Base {
+export interface IssueLabel extends Base {
   data: IssueLabelDate;
   type: Extract<Base["type"], "IssueLabel">;
 }
-interface Reaction extends Base {
+export interface Reaction extends Base {
   data: ReactionData;
   type: Extract<Base["type"], "Reaction">;
 }
-interface Cycle extends Base {
+export interface Cycle extends Base {
   data: CycleData;
   type: Extract<Base["type"], "Cycle">;
 }
-interface Project extends Base {
+export interface Project extends Base {
   data: ProjectData;
   type: Extract<Base["type"], "Project">;
 }
@@ -204,10 +205,10 @@ interface Project extends Base {
 /*
  *  Action interfaces
  */
-type Create<T = Base> = T & {
+export type Create<T = Base> = T & {
   url: string;
 };
-type Update<T = Base> = T & {
+export type Update<T = Base> = T & {
   updatedFrom: {
     updatedAt: null | ISOString;
     archivedAt: null | ISOString;
@@ -233,7 +234,7 @@ type Update<T = Base> = T & {
   };
   url?: string;
 };
-type Remove<T = Base> = T & {
+export type Remove<T = Base> = T & {
   data: { archivedAt?: ISOString };
 };
 
@@ -246,19 +247,14 @@ export interface UpdateIssueWebhook extends Update<Issue> {
 }
 export interface RemoveIssueWebhook extends Remove<Issue> {}
 
-export interface CreateCommentWebhook extends Create<Comment> {
-  data: Omit<Create<Comment>["data"], "editedAt">;
-}
+export interface CreateCommentWebhook extends Create<Comment> {}
 export interface UpdateCommentWebhook extends Update<Comment> {
   updatedFrom: Pick<
     Update["updatedFrom"],
     "updatedAt" | "archivedAt" | "body" | "editedAt"
   >;
 }
-export interface RemoveCommentWebhook extends Remove<Comment> {
-  data: Omit<Remove["data"], "archivedAt"> &
-    Omit<Remove<Comment>["data"], "issue" | "user" | "editedAt">;
-}
+export interface RemoveCommentWebhook extends Remove<Comment> {}
 
 export interface CreateIssueLabelWebhook
   extends Omit<Create<IssueLabel>, "url"> {}
