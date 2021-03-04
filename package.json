@@ -26,7 +26,7 @@
   },
   "files": [
     "lib",
-    "!__tests__"
+    "!**/__tests__"
   ],
   "keywords": [
     "Linear.app"

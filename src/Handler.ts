@@ -7,7 +7,7 @@ import {
 export class Handler {
   public readonly listeners = new Map<
     WebhookEventsUnion,
-    (webhook: any) => any
+    (webhook: any, param?: any) => any
   >();
 
   public clearCallbacks() {
@@ -16,12 +16,12 @@ export class Handler {
 
   public addCallback<T extends Webhook>(
     webhookEvent: WebhookEventsUnion,
-    callback: (webhook: T) => any
+    callback: (webhook: T, param?: any) => any
   ) {
     this.listeners.set(webhookEvent, callback);
   }
 
-  public async execCallback(webhook: Webhook) {
+  public async execCallback(webhook: Webhook, param?: any) {
     const webhookEvent = this.getWebhookEvent(webhook);
     if (webhookEvent === "UnknownWebhook") {
       throw new UnknownWebhookEventError(webhook);
@@ -31,7 +31,7 @@ export class Handler {
       throw new CallbackNotFoundError(webhookEvent);
     }
 
-    return callbackFunction(webhook);
+    return callbackFunction(webhook, param);
   }
 
   public getWebhookEvent(webhook: Webhook): WebhookEventsUnion {

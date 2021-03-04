@@ -12,6 +12,10 @@ describe("Test addCallback & execCallback", () => {
   const callbackGetActionAndType = (webhook: Webhook) => {
     return { action: webhook.action, type: webhook.type };
   };
+  const callbackCustom = (webhook: Webhook, param: { name: string }) => {
+    const { name } = param;
+    return { action: webhook.action, type: webhook.type, name };
+  };
 
   const testcases = [
     {
@@ -27,13 +31,25 @@ describe("Test addCallback & execCallback", () => {
       },
       expected: { action: "create", type: "Issue" },
     },
+    {
+      name: `Use custom param callback`,
+      input: {
+        webhook: Data.createIssue,
+        addCallback: (handler: Handler) => {
+          handler.addCallback("CreateIssueWebhook", callbackCustom);
+        },
+      },
+      expected: { action: "create", type: "Issue", name: "main" },
+    },
   ];
 
   for (const { name, input, expected } of testcases) {
     test.concurrent(name, async () => {
       const handler = new Handler();
       input.addCallback(handler);
-      const actual = await handler.execCallback(input.webhook);
+      const actual = await handler.execCallback(input.webhook, {
+        name: "main",
+      });
       expect(actual).toEqual(expected);
     });
   }
