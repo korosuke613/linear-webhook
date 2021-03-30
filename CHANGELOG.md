@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/korosuke613/linear-webhook/compare/v0.3.0...v0.3.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* ProjectData.milestoneId to optional. ([fbc91c9](https://github.com/korosuke613/linear-webhook/commit/fbc91c9837a818de273a5cbeddcf2cfc5f959734))
+
+
+
 # [0.3.0](https://github.com/korosuke613/linear-webhook/compare/v0.2.1...v0.3.0) (2021-03-04)
 
 
