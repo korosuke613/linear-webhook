@@ -152,7 +152,7 @@ export interface ProjectData extends BaseData {
   state: ProjectStateType;
   creatorId: UserId;
   leadId?: UserId;
-  milestoneId: MilestoneId;
+  milestoneId?: MilestoneId;
   targetDate?: SimpleDate;
   startedAt?: ISOString;
   sortOrder: number;
