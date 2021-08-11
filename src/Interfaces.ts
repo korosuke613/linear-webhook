@@ -24,7 +24,8 @@ export type ReactionId = Id;
 export type MilestoneId = Id;
 
 // ex) 2021-01-30T14:56:43.247Z
-export type ISOString = `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
+export type ISOString =
+  `${number}-${number}-${number}T${number}:${number}:${number}.${number}Z`;
 // ex) 2021-01-30
 export type SimpleDate = `${number}-${number}-${number}`;
 

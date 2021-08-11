@@ -21,7 +21,6 @@ export const createComment: CreateCommentWebhook = {
     // Emoji reaction used to be included here, but it became independent as `type: Reaction` on Feb 4, 2021.
     // reactions: [],
   },
-  url:
-    "https://linear.app/korosuke613/issue/KOR-12/webhook-test-2#comment-5081a82b",
+  url: "https://linear.app/korosuke613/issue/KOR-12/webhook-test-2#comment-5081a82b",
   type: "Comment",
 };
