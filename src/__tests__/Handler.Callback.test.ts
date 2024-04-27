@@ -44,7 +44,7 @@ describe("Test addCallback & execCallback", () => {
           handler.addCallback("CreateIssueWebhook", callbackCustom);
         },
       },
-      expected: { action: "create", type: "Issue", name: "maian" },
+      expected: { action: "create", type: "Issue", name: "main" },
     },
   ];
 
