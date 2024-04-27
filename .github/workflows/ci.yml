@@ -80,10 +80,15 @@ jobs:
       - name: Run Test
         run: |
           npm run test:ci -- $(test -e vitest_failed_testfiles.txt && cat vitest_failed_testfiles.txt)
+      
+      - name: Create failed tests file
+        if: ${{ failure() && github.ref_name != 'main' }}
+        run: |
           jq '.testResults[] | select(.status == "failed") | .name' vitest_result.json | jq -s --raw-output 'join(" ")' > vitest_failed_testfiles.txt
+          cat vitest_failed_testfiles.txt
           
-      - name: Save rerun hints
-        if: ${{ !cancelled() && github.ref_name != 'main' }}
+      - name: Save failed tests
+        if: ${{ failure() && github.ref_name != 'main' }}
         uses: actions/cache/save@v4
         with:
           path: vitest_failed_testfiles.txt
