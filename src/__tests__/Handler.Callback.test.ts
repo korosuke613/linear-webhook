@@ -7,6 +7,7 @@ import {
   CallbackNotFoundError,
   UnknownWebhookEventError,
 } from "../HandlerError";
+import { describe, test, expect } from "vitest";
 
 describe("Test addCallback & execCallback", () => {
   const callbackGetActionAndType = (webhook: Webhook) => {
