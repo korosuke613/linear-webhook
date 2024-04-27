@@ -1,12 +1,13 @@
-import { Webhook, WebhookEventsUnion } from "./Interfaces";
 import {
   CallbackNotFoundError,
   UnknownWebhookEventError,
 } from "./HandlerError";
+import type { Webhook, WebhookEventsUnion } from "./Interfaces";
 
 export class Handler {
   public readonly listeners = new Map<
     WebhookEventsUnion,
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     (webhook: any, param?: any) => any
   >();
 
@@ -16,11 +17,13 @@ export class Handler {
 
   public addCallback<T extends Webhook>(
     webhookEvent: WebhookEventsUnion,
-    callback: (webhook: T, param?: any) => any
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    callback: (webhook: T, param?: any) => any,
   ) {
     this.listeners.set(webhookEvent, callback);
   }
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   public async execCallback(webhook: Webhook, param?: any) {
     const webhookEvent = this.getWebhookEvent(webhook);
     if (webhookEvent === "UnknownWebhook") {

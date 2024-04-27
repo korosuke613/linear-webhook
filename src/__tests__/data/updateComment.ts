@@ -1,4 +1,4 @@
-import { UpdateCommentWebhook } from "../../Interfaces";
+import type { UpdateCommentWebhook } from "../../Interfaces";
 
 export const updateComment: UpdateCommentWebhook = {
   action: "update",

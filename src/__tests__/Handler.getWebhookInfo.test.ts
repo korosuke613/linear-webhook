@@ -1,9 +1,9 @@
 /* eslint-disable no-loop-func */
 
+import { describe, expect, test } from "vitest";
 import { Handler } from "../Handler";
 import { WebhookEvents } from "../Interfaces";
 import { default as Data } from "./data";
-import { describe, test, expect } from "vitest";
 
 describe("Test getWebhookType", () => {
   const testcases = [

@@ -1,7 +1,7 @@
 import {
-  CreateIssueWebhook,
-  CreateProjectWebhook,
-  UpdateIssueLabelWebhook,
+  type CreateIssueWebhook,
+  type CreateProjectWebhook,
+  type UpdateIssueLabelWebhook,
   WebhookHandler,
 } from "../../index";
 import { createIssue } from "../data/createIssue";
@@ -15,7 +15,7 @@ handler.addCallback<UpdateIssueLabelWebhook>(
   "UpdateIssueWebhook",
   (webhook) => {
     const action = `action: ${webhook.action}`;
-  }
+  },
 );
 handler.addCallback<CreateProjectWebhook>("CreateProjectWebhook", (webhook) => {
   console.log(webhook.data.icon);

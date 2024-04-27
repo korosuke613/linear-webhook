@@ -1,13 +1,17 @@
 /* eslint-disable no-loop-func */
 
+import { describe, expect, test } from "vitest";
 import { Handler } from "../Handler";
-import { CreateIssueWebhook, Webhook, WebhookEvents } from "../Interfaces";
-import { default as Data } from "./data";
 import {
   CallbackNotFoundError,
   UnknownWebhookEventError,
 } from "../HandlerError";
-import { describe, test, expect } from "vitest";
+import {
+  type CreateIssueWebhook,
+  type Webhook,
+  WebhookEvents,
+} from "../Interfaces";
+import { default as Data } from "./data";
 
 describe("Test addCallback & execCallback", () => {
   const callbackGetActionAndType = (webhook: Webhook) => {
@@ -26,14 +30,14 @@ describe("Test addCallback & execCallback", () => {
         addCallback: (handler: Handler) => {
           handler.addCallback<CreateIssueWebhook>(
             "CreateIssueWebhook",
-            callbackGetActionAndType
+            callbackGetActionAndType,
           );
         },
       },
       expected: { action: "create", type: "Issue" },
     },
     {
-      name: `Use custom param callback`,
+      name: "Use custom param callback",
       input: {
         webhook: Data.createIssue,
         addCallback: (handler: Handler) => {
@@ -113,7 +117,7 @@ describe("Throw an exception when an unknown event", () => {
     test.concurrent(name, async () => {
       const handler = new Handler();
       await expect(async () => {
-        await handler.execCallback(input.webhook as any);
+        await handler.execCallback(input.webhook as Webhook);
       }).rejects.toThrow(expected);
     });
   }
