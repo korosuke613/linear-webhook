@@ -1,4 +1,4 @@
-import { CreateIssueWebhook } from "../../Interfaces";
+import type { CreateIssueWebhook } from "../../Interfaces";
 
 export const createIssue: CreateIssueWebhook = {
   action: "create",

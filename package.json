@@ -14,7 +14,7 @@
     "prerelease": "npm-run-all -l -p lint test -s build",
     "clean": "rimraf lib",
     "compile": "tsc",
-    "lint": "eslint 'src/**/*.ts'",
+    "lint": "biome ci .",
     "lint:fix": "npm run lint -- --fix",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",

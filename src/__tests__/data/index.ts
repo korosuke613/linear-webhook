@@ -1,19 +1,19 @@
-import { createIssue } from "./createIssue";
 import { createComment } from "./createComment";
-import { updateIssueForLabel } from "./updateIssueForLabel";
-import { updateComment } from "./updateComment";
+import { createIssue } from "./createIssue";
+import { createIssueLabel } from "./createIssueLabel";
+import { createProjectForAllSetting } from "./createProjectForAllSetting";
+import { createReaction } from "./createReaction";
 import { removeComment } from "./removeComment";
 import { removeIssue } from "./removeIssue";
+import { removeIssueLabel } from "./removeIssueLabel";
+import { removeProject } from "./removeProject";
 import { unknownAction } from "./unknownAction";
 import { unknownType } from "./unknownType";
-import { createIssueLabel } from "./createIssueLabel";
-import { updateIssueLabel } from "./updateIssueLabel";
-import { removeIssueLabel } from "./removeIssueLabel";
-import { createReaction } from "./createReaction";
+import { updateComment } from "./updateComment";
 import { updateCycleForChangeStartTime } from "./updateCycleForChangeStartTime";
-import { createProjectForAllSetting } from "./createProjectForAllSetting";
+import { updateIssueForLabel } from "./updateIssueForLabel";
+import { updateIssueLabel } from "./updateIssueLabel";
 import { updateProjectForRename } from "./updateProjectForRename";
-import { removeProject } from "./removeProject";
 
 export default {
   createIssue,

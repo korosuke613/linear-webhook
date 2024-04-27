@@ -1,4 +1,4 @@
-import { CreateProjectWebhook } from "../../Interfaces";
+import type { CreateProjectWebhook } from "../../Interfaces";
 
 export const createProjectForDefault: CreateProjectWebhook = {
   action: "create",

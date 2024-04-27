@@ -1,4 +1,4 @@
-import { CreateCommentWebhook } from "../../Interfaces";
+import type { CreateCommentWebhook } from "../../Interfaces";
 
 export const createComment: CreateCommentWebhook = {
   action: "create",

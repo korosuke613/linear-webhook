@@ -1,4 +1,4 @@
-import { UpdateProjectWebhook } from "../../Interfaces";
+import type { UpdateProjectWebhook } from "../../Interfaces";
 
 export const updateProjectForRename: UpdateProjectWebhook = {
   action: "update",

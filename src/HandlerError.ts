@@ -1,4 +1,4 @@
-import { Webhook, WebhookEventsUnion } from "./Interfaces";
+import type { Webhook, WebhookEventsUnion } from "./Interfaces";
 
 export class CallbackNotFoundError extends Error {
   constructor(webhookType: WebhookEventsUnion) {
@@ -10,7 +10,7 @@ export class CallbackNotFoundError extends Error {
 export class UnknownWebhookEventError extends Error {
   constructor(webhook: Webhook) {
     super(
-      `Unknown webhook event. Action:${webhook.action}, Type:${webhook.type}`
+      `Unknown webhook event. Action:${webhook.action}, Type:${webhook.type}`,
     );
     this.name = "UnknownWebhookEventError";
   }

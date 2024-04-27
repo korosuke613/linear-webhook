@@ -1,4 +1,4 @@
-import { CreateReactionWebhook } from "../../Interfaces";
+import type { CreateReactionWebhook } from "../../Interfaces";
 
 export const createReaction: CreateReactionWebhook = {
   action: "create",

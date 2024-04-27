@@ -1,4 +1,4 @@
-import { RemoveCommentWebhook } from "../../Interfaces";
+import type { RemoveCommentWebhook } from "../../Interfaces";
 
 export const removeComment: RemoveCommentWebhook = {
   action: "remove",

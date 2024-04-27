@@ -1,4 +1,4 @@
-import { CreateIssueWebhook, Webhook, WebhookHandler } from "../../index";
+import { type CreateIssueWebhook, Webhook, WebhookHandler } from "../../index";
 import { createIssue } from "../data/createIssue";
 
 const handler = new WebhookHandler();

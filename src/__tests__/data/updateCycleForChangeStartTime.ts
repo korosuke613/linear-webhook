@@ -1,4 +1,4 @@
-import { UpdateCycleWebhook } from "../../Interfaces";
+import type { UpdateCycleWebhook } from "../../Interfaces";
 
 export const updateCycleForChangeStartTime: UpdateCycleWebhook = {
   action: "update",

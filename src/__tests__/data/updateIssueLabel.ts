@@ -1,4 +1,4 @@
-import { UpdateIssueLabelWebhook } from "../../Interfaces";
+import type { UpdateIssueLabelWebhook } from "../../Interfaces";
 
 export const updateIssueLabel: UpdateIssueLabelWebhook = {
   action: "update",
