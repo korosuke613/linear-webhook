@@ -232,3 +232,6 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,intellij
 
 *.zip
+
+vitest_failed_testfiles.txt
+vitest_result.json
