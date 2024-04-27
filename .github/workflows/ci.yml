@@ -2,6 +2,10 @@ name: CI
 
 on:
   pull_request:
+  push:
+    branches:
+      # Also run on main branch to have cache on default branch
+      - main
 
 jobs:
   setup:
