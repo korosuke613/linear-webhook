@@ -19,7 +19,7 @@ jobs:
 
       - name: Get all test, doc and src files that have changed
         id: changed_files
-        uses: tj-actions/changed-files@v44
+        uses: tj-actions/changed-files@0874344d6ebbaa00a27da73276ae7162fadcaf69 # v44
         with:
           files_yaml: |
             node_all:
@@ -71,7 +71,7 @@ jobs:
       - name: Run Test
         run: npm run test:coverage
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@5ecb98a3c6b747ed38dc09f787459979aebb39be # v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           directory: ./coverage/ # optional
