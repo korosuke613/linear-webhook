@@ -37,7 +37,7 @@
     "@types/node": "20.12.12",
     "@vitest/coverage-v8": "1.5.2",
     "npm-run-all2": "5.0.2",
-    "rimraf": "5.0.5",
+    "rimraf": "5.0.7",
     "shipjs": "0.23.3",
     "ts-node": "10.9.2",
     "typescript": "5.4.5",
