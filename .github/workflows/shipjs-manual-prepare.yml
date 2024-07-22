@@ -16,7 +16,7 @@ jobs:
           ref: main
       - uses: actions/setup-node@v1
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           node-version: 14.x
           cache-name: cache-node-modules
