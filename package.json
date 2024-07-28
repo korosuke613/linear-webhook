@@ -36,7 +36,7 @@
     "@biomejs/biome": "1.8.3",
     "@types/node": "20.14.11",
     "@vitest/coverage-v8": "1.6.0",
-    "npm-run-all2": "5.0.2",
+    "npm-run-all2": "6.2.2",
     "rimraf": "5.0.9",
     "shipjs": "0.26.3",
     "ts-node": "10.9.2",
