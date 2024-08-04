@@ -34,7 +34,7 @@
   "homepage": "https://github.com/korosuke613/linear-webhook#readme",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@types/node": "20.14.11",
+    "@types/node": "20.14.13",
     "@vitest/coverage-v8": "1.6.0",
     "npm-run-all2": "6.2.2",
     "rimraf": "6.0.1",
