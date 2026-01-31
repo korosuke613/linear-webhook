@@ -15,7 +15,7 @@ jobs:
       changed_files_node_lint: ${{ steps.changed_files.outputs.node_lint_any_changed }}
       changed_files_renovate: ${{ steps.changed_files.outputs.renovate_any_changed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Get all test, doc and src files that have changed
         id: changed_files
@@ -42,7 +42,7 @@ jobs:
     needs: setup
     if: needs.setup.outputs.changed_files_node_all == 'true' || needs.setup.outputs.changed_files_node_lint == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v4
         with:
@@ -59,7 +59,7 @@ jobs:
     needs: setup
     if: needs.setup.outputs.changed_files_node_all == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v4
         with:
@@ -82,7 +82,7 @@ jobs:
     needs: setup
     if: needs.setup.outputs.changed_files_node_all == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v4
         with:
@@ -102,7 +102,7 @@ jobs:
     needs: setup
     if: needs.setup.outputs.changed_files_renovate == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - run: |
           npx --package renovate -c 'renovate-config-validator'
